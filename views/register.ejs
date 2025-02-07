@@ -1,0 +1,42 @@
+<div class="card mx-auto" style="max-width: 400px">
+  <div class="card-body">
+    <h2 class="text-center">Register Here</h2>
+    <p class="text-danger text-center"><%= messages?.error ?? "" %></p>
+    <form action="/register" method="POST">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input
+          type="text"
+          name="fullName"
+          class="form-control"
+          placeholder="Full Name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Username"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    </form>
+    <div class="text-center mt-3">
+      <a href="/login">Sign In</a> | <a href="/">Home</a>
+    </div>
+  </div>
+</div>
