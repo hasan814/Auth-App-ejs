@@ -1,3 +1,4 @@
+import { register } from "../controller/auth.controller.js";
 import { Router } from "express";
 
 const router = Router();
@@ -17,8 +18,10 @@ router.get("/register", (req, res) => {
 router.get("/profile", (req, res) => {
   res.render("profile.ejs", {
     title: "Profile",
-    user: { _id: "", fullName: "", username: "", password: "" },
+    user: { _id: "", fullName: "", password: "" },
   });
 });
+
+router.post("/register", register);
 
 export default router;

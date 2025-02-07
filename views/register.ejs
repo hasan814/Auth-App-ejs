@@ -1,10 +1,13 @@
 <div class="card mx-auto" style="max-width: 400px">
   <div class="card-body">
     <h2 class="text-center">Register Here</h2>
-    <p class="text-danger text-center"><%= messages?.error ?? "" %></p>
+    <% if (messages.error) { %> <% messages.error.forEach(function(msg) { %>
+    <p class="alert alert-danger text-center"><%= msg %></p>
+    <% }) %> <% } %>
+
     <form action="/register" method="POST">
       <div class="mb-3">
-        <label class="form-label">Full Name</label>
+        <label class="form-label" for="fullname">Full Name</label>
         <input
           type="text"
           name="fullName"
@@ -14,12 +17,12 @@
         />
       </div>
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
+        <label for="email" class="form-label">email</label>
         <input
           type="text"
-          name="username"
+          name="email"
           class="form-control"
-          placeholder="Username"
+          placeholder="Email"
           required
         />
       </div>
