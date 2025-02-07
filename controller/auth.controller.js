@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../model/user.model.js";
+import passport from "passport";
 
 // ============== Register ==============
 export const register = async (req, res) => {
@@ -29,4 +30,16 @@ export const register = async (req, res) => {
 };
 
 // ============== Login ==============
-export const login = (req, res) => {};
+export const login = (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+    if (!user) {
+      req.flash("error", info.message || "Login failed");
+      return res.redirect("/login");
+    }
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      return res.redirect("/profile");
+    });
+  })(req, res, next);
+};

@@ -1,7 +1,9 @@
 import { ErrorHandling, NotFoundError } from "./utils/handling.js";
+import { passportInit } from "./config/passport.config.js";
 import { connectDB } from "./config/connectDB.js";
 
 import expressLayouts from "express-ejs-layouts";
+import passport from "passport";
 import express from "express";
 import session from "express-session";
 import morgan from "morgan";
@@ -38,8 +40,14 @@ app.use((req, res, next) => {
 });
 
 // ========== Set Up Passport =============
+passportInit(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 // ========== Routers =============
 app.use(router);
+
+// ========== Error Handling (Must be Last Middleware) =============
 app.use(NotFoundError);
 app.use(ErrorHandling);
 
