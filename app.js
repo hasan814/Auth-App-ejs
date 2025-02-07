@@ -1,14 +1,21 @@
+import { connectDB } from "./config/connectDB.js";
+
 import expressLayouts from "express-ejs-layouts";
 import express from "express";
 import session from "express-session";
 import morgan from "morgan";
 import router from "./router/index.routes.js";
+import dotenv from "dotenv";
 import flash from "express-flash";
 
 const app = express();
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-// ========== Set Up App =============
+// ========== Connect DB =============
+connectDB();
+
+// ========== Middlewares =============
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
